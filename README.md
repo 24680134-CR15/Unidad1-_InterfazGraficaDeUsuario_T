@@ -100,5 +100,15 @@ Asimismo, se reconoció la relevancia de herramientas modernas como Flet, que fa
 
 En conclusión, el estudio de los fundamentos de las interfaces gráficas de usuario proporciona las bases necesarias para el diseño y desarrollo de aplicaciones modernas, destacando la importancia de integrar componentes visuales, eventos y principios de usabilidad. Estos conocimientos resultan indispensables para crear software eficiente, intuitivo y orientado a las necesidades reales de los usuarios.
 
+## Referencias 
 
+Autor desconocido. (2024). *Building multiplatform apps with Python and Flet* [Infografía]. Material proporcionado en clase.
+
+Autor desconocido. (2024). *Framework Flet para el desarrollo de aplicaciones multiplataforma en Python* [Documento de apoyo]. Material proporcionado en clase.
+
+Shneiderman, B., Plaisant, C., Cohen, M., Jacobs, S., Elmqvist, N., & Diakopoulos, N. (2016). Designing the user interface: Strategies for effective human-computer interaction (6th ed.). Pearson.
+
+Preece, J., Rogers, Y., & Sharp, H. (2015). Interaction design: Beyond human-computer interaction (4th ed.). Wiley.
+
+Flet. (2024). Build multi-platform apps in Python powered by Flutter. https://flet.dev
 
