@@ -662,6 +662,23 @@ Por otra parte, la creación de librerías y paquetes definidos por el usuario r
 
 En conclusión, esta unidad proporciona bases sólidas para el desarrollo de software estructurado, eficiente y escalable, destacando la importancia de utilizar y crear componentes y librerías como una práctica esencial en la programación actual.
 
+## Bibliografía 
+
+Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). *Design patterns: Elements of reusable object-oriented software*. Addison-Wesley.
+
+Sommerville, I. (2016). *Software engineering* (10th ed.). Pearson.
+
+Pressman, R. S., & Maxim, B. R. (2020). *Software engineering: A practitioner’s approach* (9th ed.). McGraw-Hill.
+
+Fowler, M. (2002). *Patterns of enterprise application architecture*. Addison-Wesley.
+
+Python Software Foundation. (2024). *Python documentation*. https://docs.python.org/3/
+
+Mozilla Developer Network. (2024). *JavaScript reference*. https://developer.mozilla.org/en-US/docs/Web/JavaScript
+
+Node.js Foundation. (2024). *Node.js documentation*. https://nodejs.org/en/docs
+
+
 
 
 
