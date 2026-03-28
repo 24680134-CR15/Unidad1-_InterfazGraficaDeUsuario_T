@@ -1,4 +1,4 @@
-# Interfaz Grafica De Usuario
+# U1 Interfaz Grafica De Usuario
 ## Introducción
 
 Las Interfaces Gráficas de Usuario (GUI, por sus siglas en inglés: Graphical User Interface) representan un elemento esencial en el desarrollo de software moderno, ya que permiten la interacción entre el usuario y los sistemas informáticos mediante componentes visuales como botones, ventanas, menús e iconos. Estas interfaces tienen como objetivo principal mejorar la usabilidad y accesibilidad de las aplicaciones, facilitando su uso incluso para personas sin conocimientos técnicos avanzados.
@@ -111,4 +111,558 @@ Shneiderman, B., Plaisant, C., Cohen, M., Jacobs, S., Elmqvist, N., & Diakopoulo
 Preece, J., Rogers, Y., & Sharp, H. (2015). Interaction design: Beyond human-computer interaction (4th ed.). Wiley.
 
 Flet. (2024). Build multi-platform apps in Python powered by Flutter. https://flet.dev
+
+# U2 Interfaz Grafica De Usuario
+
+##  Introducción
+
+En la materia de **Tópicos Avanzados de Programación**, la Unidad 2: *Componentes y Librerías* aborda conceptos fundamentales para el desarrollo de software moderno, enfocados en la reutilización, modularidad y organización del código.
+
+Los componentes permiten dividir una aplicación en partes más pequeñas, independientes y reutilizables, facilitando su mantenimiento y escalabilidad. Por otro lado, las librerías y paquetes proporcionan herramientas ya desarrolladas que ayudan a resolver problemas comunes, optimizando el tiempo de desarrollo y mejorando la calidad del software.
+
+Durante esta unidad se analizan tanto las librerías proporcionadas por el lenguaje de programación como la creación de componentes y paquetes definidos por el usuario, lo que permite al desarrollador construir soluciones más eficientes, estructuradas y adaptables a distintos contextos.
+
+El estudio de estos elementos es esencial para comprender cómo se diseñan sistemas modernos, donde la reutilización de código y el uso de herramientas externas son prácticas clave en la industria del software.
+
+##  2.1 Definición conceptual de componentes, paquetes y librerías
+
+En el desarrollo de software moderno, es fundamental comprender los conceptos de **componentes**, **librerías** y **paquetes**, ya que estos permiten organizar, reutilizar y estructurar el código de manera eficiente. Estos elementos forman la base de la programación modular, la cual facilita la creación de sistemas más escalables, mantenibles y comprensibles.
+
+---
+
+###  Componentes
+
+Un **componente** es una unidad independiente de software que encapsula una funcionalidad específica y que puede ser reutilizada en diferentes partes de una aplicación o en distintos proyectos. Su principal objetivo es dividir un sistema en partes más pequeñas y manejables.
+
+Los componentes pueden incluir tanto lógica de programación como elementos visuales, dependiendo del tipo de aplicación.
+
+**Características principales:**
+- Encapsulan funcionalidad específica  
+- Son reutilizables  
+- Tienen independencia respecto a otros componentes  
+- Pueden configurarse mediante propiedades o parámetros  
+
+**Tipos de componentes:**
+- **Componentes visuales:** Son aquellos que tienen representación gráfica en la interfaz de usuario, como botones, formularios, menús o tablas.  
+- **Componentes no visuales:** No tienen interfaz gráfica y se enfocan en la lógica del programa, como funciones, servicios, validaciones o controladores.  
+
+El uso de componentes permite mejorar la organización del código, facilitar el mantenimiento y promover la reutilización en diferentes proyectos.
+
+---
+
+###  Librerías
+
+Una **librería** es un conjunto de funciones, clases o módulos predefinidos que pueden ser utilizados por los desarrolladores para realizar tareas comunes sin tener que implementarlas desde cero.
+
+Las librerías están diseñadas para resolver problemas específicos y pueden ser desarrolladas por terceros o formar parte del propio lenguaje de programación.
+
+**Características:**
+- Contienen código reutilizable  
+- Facilitan el desarrollo de aplicaciones  
+- Reducen la duplicación de código  
+- Están enfocadas en resolver problemas específicos  
+
+**Ejemplos de uso:**
+- Manipulación de fechas  
+- Operaciones matemáticas  
+- Manejo de archivos  
+- Desarrollo de interfaces gráficas  
+
+El uso de librerías permite aumentar la productividad del desarrollador y mejorar la calidad del software, ya que muchas de ellas han sido ampliamente probadas y optimizadas.
+
+---
+
+###  Paquetes
+
+Un **paquete** es una estructura que agrupa múltiples módulos, librerías o componentes relacionados en una sola unidad organizada. Su propósito es facilitar la distribución, instalación y mantenimiento del software.
+
+Los paquetes suelen incluir no solo código, sino también archivos de configuración, documentación y dependencias necesarias para su funcionamiento.
+
+**Características:**
+- Organizan el código en estructuras jerárquicas  
+- Facilitan la reutilización y distribución  
+- Permiten gestionar dependencias  
+- Mejoran la mantenibilidad del proyecto  
+
+**Diferencia entre librería y paquete:**
+- Una **librería** es un conjunto de funciones o clases enfocadas en una tarea específica  
+- Un **paquete** es un contenedor que puede incluir una o varias librerías junto con otros recursos  
+
+---
+
+###  Importancia en el desarrollo de software
+
+El uso de componentes, librerías y paquetes es esencial en la programación moderna debido a que:
+
+- Permiten desarrollar aplicaciones más rápidas y eficientes  
+- Mejoran la organización del código  
+- Facilitan el trabajo colaborativo  
+- Promueven la reutilización de soluciones ya existentes  
+- Reducen errores al utilizar código probado  
+
+---
+
+###  Conclusión
+
+Comprender la diferencia y el uso de componentes, librerías y paquetes es fundamental para cualquier desarrollador. Estos elementos permiten construir software más estructurado, reutilizable y escalable, siendo una base clave en el desarrollo de aplicaciones modernas y en el uso de frameworks y herramientas actuales.
+
+Algunos ejemplos realizados a lo largo de la unidad son:
+
+```python
+import flet as ft
+from dataclasses import dataclass
+
+# Clase de datos (dataclass)
+@dataclass
+class Usuario:
+    nombre: str
+    rol: str
+    color_borde: str = ft.Colors.BLUE
+
+
+# Componente visual
+class TarjetaPerfil(ft.Container):
+    def __init__(self, usuario: Usuario):
+        super().__init__()
+
+        self.usuario = usuario
+
+        self.content = ft.Column(
+            controls=[
+                ft.Text(usuario.nombre, weight=ft.FontWeight.BOLD, size=20),
+                ft.Text(usuario.rol, italic=True),
+                ft.ElevatedButton("Ver Perfil", on_click=self.saludar)
+            ],
+            tight=True
+        )
+
+        self.border = ft.border.all(2, usuario.color_borde)
+        self.padding = 10
+        self.border_radius = 10
+        self.width = 200
+
+    def saludar(self, e):
+        print(f"Interactuando con el componente de {self.usuario.nombre}")
+
+
+def main(page: ft.Page):
+    page.title = "Unidad 2: Componentes con Dataclass"
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+
+    # Crear usuarios usando dataclass
+    usuario1 = Usuario("Ana Garcia", "Desarrolladora Senior", ft.Colors.GREEN)
+    usuario2 = Usuario("Carlos Ruiz", "Arquitecto de Software")
+
+    # Crear tarjetas
+    tarjeta1 = TarjetaPerfil(usuario1)
+    tarjeta2 = TarjetaPerfil(usuario2)
+
+    
+
+    page.add(
+        ft.Text("Lista de Usuarios", size=30, weight="bold"),
+        ft.Row([tarjeta1, tarjeta2,], alignment=ft.MainAxisAlignment.CENTER)
+    )
+
+
+ft.app(target=main)
+```
+<img width="1584" height="892" alt="Captura de pantalla 2026-03-28 091204" src="https://github.com/user-attachments/assets/9a3c8c09-4300-4894-be77-4981f90e243f" />
+Este programa crea una aplicación gráfica sencilla en Python donde se muestran tarjetas de perfil de usuarios.
+
+En general, lo que hace es:
+
+Define una estructura de datos para representar usuarios con nombre, rol y un color de borde.
+Crea un componente visual reutilizable que muestra la información de cada usuario en forma de tarjeta.
+Cada tarjeta incluye un botón que permite interactuar; al presionarlo, se genera un mensaje en la consola.
+En la interfaz principal, se crean dos usuarios y se muestran sus tarjetas en pantalla, organizadas de forma horizontal.
+Finalmente, ejecuta la aplicación para que todo se visualice en una ventana.
+
+En resumen, el código demuestra cómo crear y usar componentes personalizados en una interfaz gráfica, aplicando reutilización de código y organización modular, que son conceptos clave de la unidad de Componentes y Librerías.
+
+## 2.2 Uso de librerías proporcionadas por el lenguaje
+
+En el desarrollo de software, los lenguajes de programación modernos incluyen un conjunto de herramientas predefinidas conocidas como **librerías estándar**. Estas librerías están diseñadas para facilitar la implementación de funcionalidades comunes, evitando que el desarrollador tenga que crear soluciones desde cero.
+
+Las librerías proporcionadas por el lenguaje forman parte integral de su entorno de desarrollo y ofrecen módulos, funciones y clases que han sido previamente diseñados, probados y optimizados. Su uso es una práctica fundamental en la programación, ya que contribuye a mejorar la eficiencia, la calidad del código y la productividad.
+
+---
+
+### Concepto de librería estándar
+
+Una **librería estándar** es un conjunto de recursos incluidos directamente en un lenguaje de programación que permite realizar tareas comunes como manejo de datos, operaciones matemáticas, manipulación de archivos, gestión de fechas, entre otras.
+
+Estas librerías están disponibles sin necesidad de instalación adicional y cuentan con documentación oficial, lo que facilita su aprendizaje y aplicación.
+
+---
+
+### Importancia del uso de librerías del lenguaje
+
+El uso de librerías estándar es esencial debido a las siguientes razones:
+
+- Permiten reducir el tiempo de desarrollo al evitar la implementación de funcionalidades básicas.
+- Ofrecen soluciones confiables, ya que han sido ampliamente probadas.
+- Mejoran la legibilidad y mantenimiento del código.
+- Promueven buenas prácticas de programación.
+- Garantizan compatibilidad con el lenguaje y su entorno.
+
+---
+
+### Funcionalidades comunes de las librerías estándar
+
+Las librerías proporcionadas por los lenguajes suelen incluir herramientas para:
+
+- Operaciones matemáticas y estadísticas.
+- Manejo de cadenas de texto.
+- Entrada y salida de datos.
+- Manipulación de archivos.
+- Manejo de fechas y tiempo.
+- Interacción con el sistema operativo.
+- Estructuras de datos avanzadas.
+
+---
+
+### Ejemplos en diferentes lenguajes
+
+#### Python
+
+Python cuenta con una amplia librería estándar que incluye módulos como:
+
+- `math`: permite realizar operaciones matemáticas avanzadas.
+- `datetime`: facilita el manejo de fechas y horas.
+- `os`: permite interactuar con el sistema operativo.
+- `sys`: proporciona acceso a variables y funciones del sistema.
+
+#### JavaScript
+
+JavaScript incorpora objetos y funciones integradas como:
+
+- `Math`: para operaciones matemáticas.
+- `Date`: para manejo de fechas.
+- `Array` y `String`: para manipulación de datos.
+- `JSON`: para el manejo de datos estructurados.
+
+---
+
+### Ventajas del uso de librerías estándar
+
+El uso de librerías proporcionadas por el lenguaje ofrece múltiples beneficios:
+
+- Disminución de errores al utilizar código previamente validado.
+- Mayor eficiencia en el desarrollo.
+- Código más limpio y estructurado.
+- Portabilidad entre diferentes sistemas.
+- Acceso a documentación oficial y soporte de la comunidad.
+
+---
+
+### Consideraciones en su uso
+
+Aunque las librerías estándar son herramientas muy útiles, es importante:
+
+- Comprender su funcionamiento antes de utilizarlas.
+- Evitar el uso innecesario de funciones que no aporten valor.
+- Mantener el código claro y bien documentado.
+- Elegir adecuadamente la librería según la necesidad del problema.
+
+---
+
+### Conclusión
+
+El uso de librerías proporcionadas por el lenguaje es una práctica esencial en el desarrollo de software moderno. Estas herramientas permiten optimizar el tiempo de programación, mejorar la calidad del código y facilitar la resolución de problemas comunes. Su correcta utilización es una habilidad fundamental para cualquier desarrollador, ya que contribuye a la creación de aplicaciones más eficientes, mantenibles y robustas.
+
+En clase se realizo el siguiente ejemplo:
+```python
+import matplotlib.pyplot as plt
+import flet as ft
+import flet_charts as fch
+import random # Para simular datos de sensores
+
+# --- FUNCIONES DE GRÁFICAS ---
+
+def generar_grafica_barras():
+    productos = ["A", "B", "C", "D"]
+    ventas = [15, 30, 45, 10]
+    fig, ax = plt.subplots(figsize=(4, 3), facecolor="#1e1e1e")
+    ax.bar(productos, ventas, color="#4dabf7")
+    ax.set_title("Ventas por Producto", fontsize=10, weight='bold', color="white")
+    ax.set_facecolor("#1e1e1e")
+    ax.tick_params(colors='white')
+    plt.tight_layout()
+    return fig
+
+def generar_grafica_lineas():
+    meses = ["Ene", "Feb", "Mar", "Abr", "May"]
+    rendimiento = [10, 25, 18, 40, 35]
+    fig, ax = plt.subplots(figsize=(4, 3), facecolor="#1e1e1e")
+    ax.plot(meses, rendimiento, color="#ffa94d", marker='o', linewidth=2)
+    ax.set_title("Tendencia de Rendimiento", fontsize=10, weight='bold', color="white")
+    ax.grid(True, linestyle="--", alpha=0.4)
+    ax.set_facecolor("#1e1e1e")
+    ax.tick_params(colors='white')
+    plt.tight_layout()
+    return fig
+
+def generar_grafica_dispersion():
+    x = [i for i in range(20)]
+    y = [random.randint(10, 50) for _ in range(20)]
+
+    fig, ax = plt.subplots(figsize=(4, 3), facecolor="#1e1e1e")
+    ax.scatter(x, y, color="#b197fc", alpha=0.8, edgecolors="white")
+    ax.set_title("Muestreo de Sensores", fontsize=10, weight='bold', color="white")
+    ax.set_facecolor("#1e1e1e")
+    ax.tick_params(colors='white')
+    plt.tight_layout()
+    return fig
+
+# --- GRÁFICA DE PASTEL ---
+def generar_grafica_pastel():
+    categorias = ["Comida", "Transporte", "Renta", "Entretenimiento"]
+    gastos = [35, 20, 30, 15]
+
+    fig, ax = plt.subplots(figsize=(4, 3), facecolor="#1e1e1e")
+    ax.pie(
+        gastos,
+        labels=categorias,
+        autopct='%1.1f%%',
+        startangle=90,
+        colors=["#4dabf7", "#ffa94d", "#51cf66", "#f783ac"],
+        textprops={'color':"white"}
+    )
+    ax.set_title("Distribución de Gastos", fontsize=10, weight='bold', color="white")
+    plt.tight_layout()
+    return fig
+
+
+def main(page: ft.Page):
+    page.title = "Dashboard TAP"
+    page.theme_mode = ft.ThemeMode.DARK
+    page.bgcolor = "#121212"
+    page.vertical_alignment = "start"
+    page.horizontal_alignment = "center"
+
+    header = ft.Text(
+        "Dashboard de Visualización de Datos",
+        size=26,
+        weight="bold",
+        color="white"
+    )
+
+    tablero = ft.GridView(
+        expand=True,
+        runs_count=2,
+        spacing=20,
+        run_spacing=20,
+        child_aspect_ratio=1.5,
+    )
+
+    # --- ESPACIO 1: BARRAS ---
+    fig_1 = generar_grafica_barras()
+    contenedor_1 = ft.Container(
+        content=fch.MatplotlibChart(figure=fig_1),
+        bgcolor="#1e1e1e",
+        border_radius=12,
+        padding=10,
+        shadow=ft.BoxShadow(blur_radius=15, color="#00000066")
+    )
+    plt.close(fig_1)
+
+    # --- ESPACIO 2: LÍNEAS ---
+    fig_2 = generar_grafica_lineas()
+    contenedor_2 = ft.Container(
+        content=fch.MatplotlibChart(figure=fig_2),
+        bgcolor="#1e1e1e",
+        border_radius=12,
+        padding=10,
+        shadow=ft.BoxShadow(blur_radius=15, color="#00000066")
+    )
+    plt.close(fig_2)
+
+    # --- ESPACIO 3: DISPERSIÓN ---
+    fig_3 = generar_grafica_dispersion()
+    contenedor_3 = ft.Container(
+        content=fch.MatplotlibChart(figure=fig_3),
+        bgcolor="#1e1e1e",
+        border_radius=12,
+        padding=10,
+        shadow=ft.BoxShadow(blur_radius=15, color="#00000066")
+    )
+    plt.close(fig_3)
+
+    # --- ESPACIO 4: PASTEL ---
+    fig_4 = generar_grafica_pastel()
+    contenedor_4 = ft.Container(
+        content=fch.MatplotlibChart(figure=fig_4),
+        bgcolor="#1e1e1e",
+        border_radius=12,
+        padding=10,
+        shadow=ft.BoxShadow(blur_radius=15, color="#00000066")
+    )
+    plt.close(fig_4)
+
+    tablero.controls.append(contenedor_1)
+    tablero.controls.append(contenedor_2)
+    tablero.controls.append(contenedor_3)
+    tablero.controls.append(contenedor_4)
+
+    page.add(header, ft.Divider(color="#333333"), tablero)
+
+
+if __name__ == "__main__":
+    ft.app(target=main)
+```
+<img width="1584" height="892" alt="image" src="https://github.com/user-attachments/assets/13c8e694-5ad0-4fbf-a388-0a3a59c76469" />
+
+Este programa desarrolla una aplicación gráfica en Python que funciona como un dashboard de visualización de datos. Su objetivo principal es mostrar información de manera visual mediante diferentes tipos de gráficas dentro de una misma interfaz.
+
+Para lograrlo, el código genera cuatro representaciones distintas de datos: una gráfica de barras para mostrar ventas por producto, una gráfica de líneas que representa una tendencia de rendimiento a lo largo del tiempo, una gráfica de dispersión que simula datos de sensores utilizando valores aleatorios, y una gráfica de pastel que ilustra la distribución de gastos en distintas categorías. Cada una de estas gráficas es creada de forma independiente y posteriormente integrada en la interfaz.
+
+La aplicación utiliza un entorno visual que permite organizar estos elementos en una cuadrícula, lo que facilita ver todas las gráficas simultáneamente, como si se tratara de un panel de control o monitoreo. Además, se aplica un diseño en modo oscuro con estilos modernos, incluyendo contenedores con bordes redondeados y efectos visuales, lo que mejora la presentación.
+
+En conjunto, el código demuestra cómo combinar librerías de visualización de datos con herramientas de interfaz gráfica para construir una aplicación completa que permite analizar información de forma clara, organizada y visualmente atractiva.
+
+## 2.3 Creación de componentes (visuales y no visuales) definidos por el usuario
+
+En el desarrollo de software, la creación de componentes definidos por el usuario es una práctica fundamental que permite estructurar las aplicaciones de manera modular, facilitando la reutilización del código, el mantenimiento y la escalabilidad. Un componente es una unidad independiente que encapsula funcionalidad específica y que puede integrarse dentro de un sistema más amplio.
+
+Los componentes pueden clasificarse en dos grandes categorías: componentes visuales y componentes no visuales, dependiendo de si tienen o no representación gráfica dentro de la interfaz de usuario.
+
+---
+
+### Componentes visuales
+
+Los componentes visuales son aquellos que forman parte de la interfaz gráfica de una aplicación y que interactúan directamente con el usuario. Estos componentes representan elementos visibles como botones, formularios, paneles, tarjetas, tablas, entre otros.
+
+La creación de componentes visuales definidos por el usuario permite diseñar interfaces más organizadas y consistentes, ya que encapsulan tanto la estructura visual como el comportamiento asociado. Esto significa que un mismo componente puede reutilizarse múltiples veces en distintas partes de la aplicación sin necesidad de duplicar código.
+
+Además, los componentes visuales suelen ser configurables mediante propiedades, lo que permite adaptar su comportamiento o apariencia según las necesidades específicas. Por ejemplo, un componente de tarjeta puede recibir datos diferentes para mostrar información personalizada sin modificar su estructura interna.
+
+---
+
+### Componentes no visuales
+
+Por otro lado, los componentes no visuales son aquellos que no tienen representación gráfica, pero que cumplen funciones esenciales dentro del sistema. Estos componentes se encargan de la lógica del programa, como el procesamiento de datos, validaciones, acceso a bases de datos o comunicación con servicios externos.
+
+A diferencia de los componentes visuales, estos se enfocan en la funcionalidad interna de la aplicación y suelen implementarse mediante funciones, clases o servicios. Su principal ventaja es que permiten separar la lógica del negocio de la interfaz de usuario, lo que mejora la organización del código y facilita su mantenimiento.
+
+---
+
+### Importancia de la creación de componentes
+
+La creación de componentes definidos por el usuario es clave en el desarrollo moderno debido a que:
+
+- Permite dividir sistemas complejos en partes más pequeñas y manejables.
+- Facilita la reutilización del código en diferentes proyectos.
+- Mejora la legibilidad y organización del software.
+- Reduce la duplicación de código.
+- Favorece el trabajo colaborativo en equipos de desarrollo.
+
+---
+
+### Buenas prácticas en la creación de componentes
+
+Para lograr componentes eficientes y reutilizables, es importante seguir ciertas buenas prácticas:
+
+- Diseñar componentes con una única responsabilidad.
+- Mantener una estructura clara y bien organizada.
+- Utilizar nombres descriptivos que reflejen su función.
+- Evitar dependencias innecesarias entre componentes.
+- Documentar su funcionamiento y forma de uso.
+
+---
+
+### Conclusión
+
+La creación de componentes visuales y no visuales definidos por el usuario es una técnica esencial en la ingeniería de software. Permite desarrollar aplicaciones más estructuradas, reutilizables y fáciles de mantener. Al separar la lógica de la presentación y encapsular funcionalidades específicas, los desarrolladores pueden construir sistemas más robustos y adaptables a diferentes contextos y necesidades.
+
+## 2.4 Creación y uso de paquetes/librerías definidas por el usuario
+
+En el desarrollo de software, además de utilizar librerías proporcionadas por el lenguaje o por terceros, los desarrolladores tienen la posibilidad de crear sus propias librerías o paquetes con el objetivo de reutilizar código en distintos proyectos. Esta práctica es fundamental para mejorar la organización, eficiencia y mantenibilidad de las aplicaciones.
+
+Una librería definida por el usuario es un conjunto de funciones, clases o componentes creados para resolver problemas específicos, mientras que un paquete es una estructura que agrupa estos elementos junto con otros recursos necesarios, como configuraciones y documentación.
+
+---
+
+### Proceso de creación de una librería o paquete
+
+La creación de una librería o paquete implica una serie de pasos que permiten estructurar correctamente el código para su posterior reutilización:
+
+En primer lugar, se debe identificar la funcionalidad que se desea encapsular. Esta funcionalidad debe ser lo suficientemente general como para poder utilizarse en diferentes contextos.
+
+Posteriormente, se organiza el código en módulos o archivos, separando las distintas responsabilidades. Esta organización facilita la comprensión y el mantenimiento del sistema.
+
+Una vez estructurado el código, es importante documentar su uso, especificando cómo se debe importar, qué parámetros recibe y qué resultados devuelve. La documentación es clave para que otros desarrolladores puedan utilizar la librería correctamente.
+
+Finalmente, el paquete puede prepararse para su distribución, ya sea para uso interno en un proyecto o para su publicación en repositorios especializados.
+
+---
+
+### Uso de librerías definidas por el usuario
+
+Una vez creada una librería o paquete, este puede ser reutilizado en diferentes partes de un mismo proyecto o incluso en otros proyectos. Para ello, generalmente se importa el módulo correspondiente y se utilizan sus funciones o clases según sea necesario.
+
+El uso de librerías propias permite mantener el código más limpio, ya que evita la repetición de funciones y centraliza la lógica en un solo lugar.
+
+---
+
+### Ventajas de crear librerías propias
+
+El desarrollo de librerías definidas por el usuario ofrece múltiples beneficios:
+
+- Permite reutilizar código de manera eficiente.
+- Mejora la organización del proyecto.
+- Facilita el mantenimiento y actualización del software.
+- Reduce la duplicación de código.
+- Favorece el trabajo colaborativo al compartir funcionalidades comunes.
+
+---
+
+### Consideraciones importantes
+
+Al crear paquetes o librerías propias, es importante tener en cuenta ciertos aspectos:
+
+- Diseñar interfaces claras y fáciles de usar.
+- Mantener una estructura organizada del código.
+- Versionar adecuadamente la librería para controlar cambios.
+- Documentar su funcionamiento de forma detallada.
+- Asegurar la compatibilidad con el entorno donde será utilizada.
+
+---
+
+### Ejemplos de herramientas de gestión de paquetes
+
+Existen diversas herramientas que permiten distribuir y gestionar paquetes en distintos lenguajes de programación, tales como gestores de paquetes. Estos facilitan la instalación, actualización y eliminación de librerías dentro de un proyecto.
+
+---
+
+### Conclusión
+
+La creación y uso de paquetes y librerías definidas por el usuario es una práctica esencial en el desarrollo de software moderno. Permite construir aplicaciones más organizadas, reutilizables y escalables. Al encapsular funcionalidades específicas y facilitar su distribución, los desarrolladores pueden optimizar su trabajo y mejorar la calidad del software producido. 
+
+## Proyecto Integrador
+Este fue el proyecto integrador de la unidad 2, en el cual se desarrolla una aplicación gráfica completa que simula una tienda en línea de productos tecnológicos.
+
+La aplicación muestra un catálogo de productos organizados en tarjetas visuales donde se presenta información como nombre, precio, descripción, categoría, imagen y disponibilidad. Cada producto permite al usuario interactuar mediante botones para agregarlo al carrito de compras o marcarlo como favorito.
+
+El sistema incluye un carrito dinámico que almacena los productos seleccionados, permite aumentar o disminuir cantidades y calcula automáticamente el total de la compra. Además, se muestra un indicador visual con la cantidad de artículos agregados y un panel lateral donde se visualiza el resumen del carrito.
+
+También se implementa un sistema de favoritos que permite al usuario guardar productos de interés, actualizando visualmente el estado de cada elemento. La interfaz utiliza un diseño moderno en modo oscuro, con estilos personalizados, tipografías y una organización responsiva.
+
+En conjunto, el programa demuestra la creación y uso de componentes visuales, manejo de estado, interacción del usuario y reutilización de código, integrando los conceptos principales de componentes y librerías vistos en la unidad.
+
+<img width="1584" height="892" alt="image" src="https://github.com/user-attachments/assets/fcab259a-3cf4-4565-a651-6f64393bc77f" />
+
+## Conclusión de la unidad 2 
+
+Componentes y Librerías permitió comprender la importancia de la modularidad y la reutilización en el desarrollo de software moderno. A lo largo de esta unidad se analizaron los conceptos fundamentales de componentes, librerías y paquetes, así como su aplicación práctica tanto con herramientas proporcionadas por el lenguaje como mediante la creación de soluciones propias.
+
+Se aprendió que los componentes, ya sean visuales o no visuales, permiten estructurar mejor una aplicación al dividirla en partes independientes y reutilizables, facilitando su mantenimiento y escalabilidad. Asimismo, el uso de librerías estándar y externas contribuye a optimizar el tiempo de desarrollo y mejorar la calidad del código al aprovechar soluciones ya existentes y probadas.
+
+Por otra parte, la creación de librerías y paquetes definidos por el usuario refuerza la capacidad de organizar proyectos de manera más profesional, promoviendo la reutilización del código y el trabajo colaborativo. Estos conocimientos se integraron en el desarrollo de un proyecto práctico, donde se aplicaron los conceptos vistos para construir una aplicación funcional.
+
+En conclusión, esta unidad proporciona bases sólidas para el desarrollo de software estructurado, eficiente y escalable, destacando la importancia de utilizar y crear componentes y librerías como una práctica esencial en la programación actual.
+
+
+
+
 
